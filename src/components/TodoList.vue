@@ -4,7 +4,7 @@
         <label class="label" for="task">New task: </label>
         <input class="input" type="text" v-model="newTask" id="task"> 
         <input class="button" type="submit" value="Create task">
-        <input class="button2" value="Clear All" @click.prevent="deleteTask">
+        <input class="button2" type="submit" value="Clear All" @click.prevent="deleteTask">
     </form>
         <ul class="list">
             <li 
