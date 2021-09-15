@@ -4,6 +4,7 @@
         <label class="label" for="task">New task: </label>
         <input class="input" type="text" v-model="newTask" id="task"> 
         <input class="button" type="submit" value="Create task">
+        <input class="button2" value="Clear All" @click.prevent="deleteTask">
     </form>
         <ul class="list">
             <li 
@@ -14,9 +15,7 @@
             @click="completeTask(task.id)"
             >
             {{task.text}} 
-            <label class="trash" @click="deleteTask(task.id)">🗑️</label>
-            </li>
-            
+            </li>     
         </ul>
     </div>
 </template>
@@ -29,6 +28,8 @@ export default {
     }),
     methods: {
         createTasks(){
+            if (!this.newTask) return
+
             let task = {
                 id: counter++,
                 text: this.newTask,
@@ -45,11 +46,8 @@ export default {
                 
             findTask.completed = true
         },
-        deleteTask(id){
-            let findTask = this.tasks.find( obj => {
-                return obj.id === id
-            })
-            this.tasks.splice(findTask)
+        deleteTask(){
+            this.tasks = []
         }
     }
 }
@@ -84,6 +82,18 @@ export default {
         color: #ecf0f1;
         cursor: pointer
     }
+    .button2 {
+        text-align: center;
+        width: 70px;
+        margin-left: 20px;
+        height: 35px;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, .2);
+        background-color: darkred;
+        color: #ecf0f1;
+        cursor: pointer
+    }
     .list {
         margin-top: 40px;
     }
@@ -96,6 +106,8 @@ export default {
         text-decoration: line-through;
     }
     .trash {
+        color: white;
+        text-decoration: line-through;
         margin-left: 20px;
     }
 </style>
